@@ -50,7 +50,7 @@ func UpdateBook(db *gorm.DB) gin.HandlerFunc {
 		var book models.Book
 
 		if err := db.First(&book, "id=?", ID).Error; err != nil {
-			ctx.JSON(400, gin.H{"message": "Product ID not found"}) // 400 : invalid syntax request to server
+			ctx.JSON(400, gin.H{"message": "Book ID not found"}) // 400 : invalid syntax request to server
 		}
 
 		amount, err := strconv.Atoi(ctx.PostForm("amount"))
@@ -80,10 +80,10 @@ func DeleteBook(db *gorm.DB) gin.HandlerFunc {
 		var book models.Book
 
 		if err := db.First(&book, "id=?", ID).Error; err != nil {
-			ctx.JSON(404, gin.H{"message": "Product ID not found."})
+			ctx.JSON(404, gin.H{"message": "Book ID not found."})
 			return
 		}
 		db.Delete(&book)
-		ctx.JSON(200, gin.H{"message": "Product succesfully deleted."})
+		ctx.JSON(200, gin.H{"message": "Book succesfully deleted."})
 	}
 }
