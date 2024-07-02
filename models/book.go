@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Book struct{
     gorm.Model
-    ID      int `gorm:"primaryKey" json:"id"`
+    ID      int64 `gorm:"primaryKey" json:"id"`
     Title    string `json:"title"`
     Author    string `json:"author"`
     Publisher   string `json:"publisher"`
