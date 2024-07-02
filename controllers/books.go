@@ -73,3 +73,17 @@ func UpdateBook(db *gorm.DB) gin.HandlerFunc {
 		ctx.JSON(200, book)
     }
 }
+
+func DeleteBook(db *gorm.DB) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		ID := ctx.Param("id")
+		var book models.Book
+
+		if err := db.First(&book, "id=?", ID).Error; err != nil {
+			ctx.JSON(404, gin.H{"message": "Product ID not found."})
+			return
+		}
+		db.Delete(&book)
+		ctx.JSON(200, gin.H{"message": "Product succesfully deleted."})
+	}
+}
